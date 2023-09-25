@@ -33,4 +33,24 @@ def lista_atlag(lista):
 print(lista_atlag(l1))
 print(lista_atlag(l2))
 print(lista_atlag(l3))
+
+print("--------")
+
+
+gy = ["alma,narancs,barack,pomelo"]
+def nagybetusit(lista):
+    for i in range(len(lista)):
+        lista[i] = lista[i].upper()
+        return lista
+print(gy)
+print(nagybetusit(gy[:]))
+print(gy)
+
++d1{
+    "nev":"dobostorta"
+    "szeletek":12
+    "elfogyott":False
+}
+
+
     
