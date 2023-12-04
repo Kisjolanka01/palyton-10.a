@@ -43,7 +43,7 @@ for het_szamlalo in range(len(hetek)):
     print(f"{het_szamlalo}.het: {tamadasok}")
 
 for het_szamlalo in range(len(hetek)):
-    str_=str(het_szamlalo)+"1. hét:"
+    str_=str(het_szamlalo)+". hét:"
     for nap_szamlalo in range(len(hetek[het_szamlalo])):
         str_+=str([het_szamlalo] [nap_szamlalo])+" "
 print(str_)
