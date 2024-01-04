@@ -3,120 +3,112 @@ import random
 # 1. Feladat
 lista = []
 
-n = int(input("Add meg a lista elemszámét [30...60]: "))
+while True:
+    szam = int(input("Add meg a lista elemszámát [30...60]: "))
+    if szam >= 30 and szam <= 60:
+        break
+    print("Hibás adatbevitel! Próbáld meg újra...")
 
-while (n < 30 or n > 60):
-    print("hibás adatbevitel! Próbáld meg újra...")
-    n = int(input("Add meg a lista elemszámét [30...60]: "))
-
-for i in range(n):
+for i in range(szam):
     lista.append(random.randint(-100, 100))
 
 # 2. Feladat
-start = int(input(f"Add meg a kezdő sorszámot [1...{n}]: "))
-while (start < 1 or start > n):
+kezdo = int(input(f"Add meg a kezdő sorszámot [1...{szam}]: "))
+while (kezdo < 1 or kezdo > szam):
     print("Hibás adatbevitel vagy befejező sorszám! Próbáld meg újra...")
-    start = int(input(f"Add meg a kezdő sorszámot [1...{n}]: "))
+    kezdo = int(input(f"Add meg a kezdő sorszámot [1...{szam}]: "))
 
-end = int(input(f"Add meg a befejező sorszámot [1...{n}]: "))
-while (end < 1 or end > n or end < start):
-    print("Hibás adatbevitel vagy befejező sorszám! Próbáld meg újra...")
-    end = int(input(f"Add meg a befejező sorszámot [1...{n}]: "))
+befejezo = int(input(f"Add meg a befejező sorszámot [1...{szam}]: "))
+while (befejezo < 1 or befejezo > szam or befejezo < kezdo):
+    print("Hibás adatbevitel! Próbáld meg újra...")
+    befejezo = int(input(f"Add meg a befejező sorszámot [1...{szam}]: "))
 
-lista2feladat = []
-
-for i in range(start, end + 1):
-    lista2feladat.append(lista[i])
-    print(f"{i}. elem: {lista[i]}")
+for i in range(kezdo - 1, befejezo):
+    print(f"{i + 1}. elem: {lista[i]}")
 
 # 3. Feladat
 osszeg = 0
-for elem in lista2feladat:
-    osszeg += elem
+for e in lista:
+    osszeg = osszeg + e
 
-print(f"A lista {start}. és {end}. közötti elemeinek összege: {osszeg}")
+print(f"A lista {kezdo}. és {befejezo}. közötti elemeinek összege: {osszeg}")
 
-                             #lista2feladat[lista2feladat.length - 1]
-szorzat = lista2feladat[0] * lista2feladat[-1]
+szorzat = lista[0] * lista[-1]
 
-print(f"A lista első és utolsó elemének szorzata: {lista2feladat[0]} * {lista2feladat[-1]} = {szorzat}")
+print(f"A lista első és utolsó elemének szorzata: {lista[0]} * {lista[-1]} = {szorzat}")
 
-if(osszeg > szorzat):
-    print(f"A lista {start}. és {end}. közötti elemeinek összege a nagyobb.")
+if (osszeg > szorzat):
+    print(f"A lista {kezdo}. és {befejezo}. közötti elemeinek összege a nagyobb.")
 else:
     print(f"A lista első és utolsó elemének szorzata a nagyobb.")
 
 # 4. Feladat
-min = lista[0]
-max = lista[0]
+minErtek = lista[0]
+maxErtek = lista[0]
 
 for elem in lista:
-    if elem < min:
-        min = elem
-    if elem > max:
-        max = elem
+    if elem < minErtek:
+        minErtek = elem
+    if elem > maxErtek:
+        maxErtek = elem
 
-print(f"A listában található legkisebb szám: {min}")
-print(f"A listában található legnagyobb szám: {max}")
+print(f"A listában található legkisebb szám: {minErtek}")
+print(f"A listában található legnagyobb szám: {maxErtek}")
 
-vanBenne = False
+van = False
 
-for elem in lista2feladat:
-    if(min == elem):
-        vanBenne = True
+for e in lista:
+    if minErtek == e:
+        van = True
 
-if(vanBenne):
-    print(f"A legkisebb szám megtalálható a(z) {start}. és a(z) {end}. sorszámú elemek között.")
+if van:
+    print(f"A legkisebb szám megtalálható a(z) {kezdo}. és a(z) {befejezo}. sorszámú elemek között.")
 else:
-    print(f"A legkisebb szám nem megtalálható a(z) {start}. és a(z) {end}. sorszámú elemek között.")
+    print(f"A legkisebb szám nem megtalálható a(z) {kezdo}. és a(z) {befejezo}. sorszámú elemek között.")
 
-vanBenne = False
+van = False
+for e in lista:
+    if maxErtek == e:
+        van = True
 
-for elem in lista2feladat:
-    if(max == elem):
-        vanBenne = True
-
-if(vanBenne):
-    print(f"A legnagyobb szám megtalálható a(z) {start}. és a(z) {end}. sorszámú elemek között.")
+if van:
+    print(f"A legnagyobb szám megtalálható a(z) {kezdo}. és a(z) {befejezo}. sorszámú elemek között.")
 else:
-    print(f"A legnagyobb szám nem megtalálható a(z) {start}. és a(z) {end}. sorszámú elemek között.")
+    print(f"A legnagyobb szám nem megtalálható a(z) {kezdo}. és a(z) {befejezo}. sorszámú elemek között.")
 
 # 5. Feladat
-min = lista2feladat[0]
+minErtek = lista[0]
 
-for elem in lista2feladat:
-    if elem < min:
-        min = elem
+for e in lista:
+    if e < minErtek:
+        minErtek = e
 
-print(f"A lista {start}. és {end}. elemei között található legkisebb szám: {min}")
+print(f"A lista {kezdo}. és {befejezo}. elemei között található legkisebb szám: {minErtek}")
 
 db = 0
-for elem in lista:
-    if(elem == min):
+for e in lista:
+    if e == minErtek:
         db += 1
 
-print(f"Előfordulások száma a teljes listában: {db}db")
+print(f"Előfordulások száma a teljes listában: {db} db")
 
 # 6. Feladat
-min = lista[0]
+minErtek = lista[0]
+for e in lista:
+    if e < minErtek:
+        minErtek = e
 
-for elem in lista:
-    if(elem < min):
-        min = elem
-
-vanNegativ = False
+van = False
 maxIndex = 0
-max = min
-
+maxErtek = minErtek
 for i in range(len(lista)):
-    elem = lista[i]
-    if(elem < 0):
-        vanNegativ = True
-        if(elem > max):
-            max = elem
+    if lista[i] < 0:
+        van = True
+        if lista[i] > maxErtek:
+            maxErtek = lista[i]
             maxIndex = i
 
-if(vanNegativ):
-    print(f"A listában található legnagyobb negatív szám: {max}, helye: {maxIndex} pozíció.")
+if van:
+    print(f"A listában található legnagyobb negatív szám: {maxErtek}, helye: {maxIndex} pozíció.")
 else:
     print(f"A listában nincs negatív szám.")
