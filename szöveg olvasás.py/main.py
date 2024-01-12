@@ -49,7 +49,22 @@ for i in range (len(name_list)):
         marcind =name_list[i]
 print("Márciusban {marcing} sütöttek a legetöbb palacsintat")
 # 4) Add meg, hogy ki sütötte az évben a legkevesebb palacsintát!
+legkevesebb = pancake_list[0]
+for i in range(len(pancake_list)):
+    if sum(pancake_list[i]) <= legkevesebb:
+        legkevesebb = sum(pancake_list[i])
+        legind= name_list[i]
+print(f"Az évben {legind} sütött a legkevesebb palacsintát")
 # 5) Add meg, hogy az a személy, akinek B-vel kezdődik a neve, Májusban hány palacsintát sütött.
+for i in range(len(name_list)):
+    if name_list[i] [0] =="B":
+        print(f" Májusban {pancake_list[i][4]} palacsintat sutott az az ember,akinek B-vel kezodik a neve")
 # 6) Volt-e olyan személy, akinek az évben változó teljesítménye volt?
 #       Pl: sütött valamennyit, majd a következő hónapban többet, a következőben az előzőnél kevesebbet stb
 #       írd ki a személy nevét!
+valtozo= []
+for i in range(len(pancake_list)):
+    for x in range(len(pancake_list)[i]):
+        if pancake_list[i][x]> pancake_list[i][x+1] and pancake_list[i][x+1]:
+            valtozo.append(".")
+            
