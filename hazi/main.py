@@ -1,51 +1,46 @@
-def fajlbol_olvas(fajl_nev):
+def beolvas_input_fajl(fajlnev):
     try:
-        with open(fajl_nev, 'r') as fajl:
-            return [[int(szam) for szam in sor.split()] for sor in fajl]
+        with open(fajlnev, 'r') as fajl:
+            sorok = fajl.readlines()
+            return [list(map(int, sor.strip().split())) for sor in sorok]
     except FileNotFoundError:
-        print(f"A '{fajl_nev}' fájl nem található.")
+        print(f"A(z) {fajlnev} fájl nem található.")
         return None
 
-def szamok_osszege(matrix):
-    return sum(szam for sor in matrix for szam in sor)
-
-def soronkenti_osszeg(matrix):
+def sorok_osszege(matrix):
     return [sum(sor) for sor in matrix]
 
-def oszloponkenti_osszeg(matrix):
-    return [sum(oszlop) for oszlop in zip(*matrix)]
+def oszlopok_osszege(matrix):
+    oszlopok_szama = len(matrix[0])
+    return [sum(matrix[sor][oszlop] for sor in range(len(matrix))) for oszlop in range(oszlopok_szama)]
 
-def menu_kiirasa():
-    print("Menüpontok:")
+def menu_megjelenitese():
+    print("\nMenüpontok:")
     print("1. Számok összege")
     print("2. Számok soronkénti összege")
     print("3. Számok oszloponkénti összege")
     print("0. Kilépés")
 
-def main():
-    fajl_nev = "input.txt"
-    matrix = fajlbol_olvas(fajl_nev)
+szamok = beolvas_input_fajl("input.txt")
+if szamok is None:
+    exit(1)
 
-    if matrix is None:
-        return
+while True:
+    menu_megjelenitese()
+    valasztas = input("Válassz egy menüpontot (0-3): ")
 
-    while True:
-        menu_kiirasa()
-        valasztas = input("Válassz egy menüpontot (0-3): ")
-
-        if valasztas == "0":
-            print("Kilépés...")
-            break
-        elif valasztas == "1":
-            print(f"A számok összege: {szamok_osszege(matrix)}")
-        elif valasztas == "2":
-            for i, sor_osszeg in enumerate(soronkenti_osszeg(matrix), start=1):
-                print(f"{i}. sor: {sor_osszeg}")
-        elif valasztas == "3":
-            for i, oszlop_osszeg in enumerate(oszloponkenti_osszeg(matrix), start=1):
-                print(f"{i}. oszlop: {oszlop_osszeg}")
-        else:
-            print("Érvénytelen választás. Kérlek, válassz újra.")
-
-if __name__ == "__main__":
-    main()
+    if valasztas == '0':
+        print("Viszontlátásra!")
+        break
+    elif valasztas == '1':
+        print(f"A számok összege: {sum(sum(sor) for sor in szamok)}")
+    elif valasztas == '2':
+        sor_osszegek = sorok_osszege(szamok)
+        for i, sor_osszeg in enumerate(sor_osszegek, start=1):
+            print(f"{i}. sor: {sor_osszeg}")
+    elif valasztas == '3':
+        oszlop_osszegek = oszlopok_osszege(szamok)
+        for i, oszlop_osszeg in enumerate(oszlop_osszegek, start=1):
+            print(f"{i}. oszlop: {oszlop_osszeg}")
+    else:
+        print("Érvénytelen választás. Kérlek, válassz újra.")
